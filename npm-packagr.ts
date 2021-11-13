@@ -13,7 +13,7 @@ npmPackagr({
         doIf({
             env: "publish",
             pipelines: [
-                // git("check-status"),
+                git("check-status"),
 
                 build(({ exec }) => exec("tsc")),
 

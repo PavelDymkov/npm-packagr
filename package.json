@@ -17,6 +17,7 @@
         "commander": "^8.3.0",
         "cross-env": "^7.0.3",
         "logical-not": "^1.0.9",
+        "package-badges": "^1.0.1",
         "shelljs": "^0.8.4",
         "ts-node": "^10.4.0",
         "type-fest": "^2.5.3"
