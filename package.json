@@ -7,7 +7,14 @@
         "email": "dymkov86@gmail.com"
     },
     "license": "ISC",
-    "keywords": [],
+    "keywords": [
+        "npm",
+        "publish"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/PavelDymkov/npm-packagr.git"
+    },
     "scripts": {
         "build": "packagr",
         "prepublishOnly": "exit 1",
