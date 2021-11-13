@@ -41,7 +41,8 @@ npmPackagr({
                 badge(BadgeType.TSDeclarations),
                 badge(BadgeType.License),
 
-                // git("push"),
+                git("commit", "npm-packagr"),
+                git("push"),
             ],
         }),
 
