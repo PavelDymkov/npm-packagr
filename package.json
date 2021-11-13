@@ -9,7 +9,7 @@
     "license": "ISC",
     "keywords": [],
     "scripts": {
-        "build": "node node_modules/npm-packagr/cli.js",
+        "build": "packagr",
         "prepublishOnly": "exit 1",
         "start": "packagr --dev"
     },
@@ -25,7 +25,7 @@
     "devDependencies": {
         "@types/node": "^16.11.7",
         "@types/shelljs": "^0.8.9",
-        "npm-packagr": "^0.0.4",
+        "npm-packagr": "^0.0.6",
         "prettier": "^2.4.1",
         "typescript": "^4.4.4"
     }
