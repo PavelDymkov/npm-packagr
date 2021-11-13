@@ -38,7 +38,11 @@ npmPackagr({
 
         doIf({
             env: "publish",
-            pipelines: [badge(BadgeType.Build), badge(BadgeType.License)],
+            pipelines: [
+                badge(BadgeType.Build),
+                badge(BadgeType.TSDeclarations),
+                badge(BadgeType.License),
+            ],
         }),
 
         assets("LICENSE", "README.md", "src/cli.js"),

@@ -9,6 +9,7 @@ export enum BadgeType {
     Build = "build",
     License = "license",
     NpmVersion = "npm-version",
+    Test = "test",
     TSDeclarations = "dts",
 }
 
@@ -36,6 +37,13 @@ export function badge(
                 case BadgeType.NpmVersion:
                     create("npm", {
                         label: "npm",
+                        message: getNpmVersion(),
+                        messageColor: "informational",
+                    });
+                    break;
+                case BadgeType.Test:
+                    create("test", {
+                        label: "test",
                         message: getNpmVersion(),
                         messageColor: "informational",
                     });
