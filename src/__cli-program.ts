@@ -1,7 +1,9 @@
-import { program } from "commander";
+import { Command } from "commander";
 
 import { NPM_PACKAGR_DEV } from "./__internal__/constants";
 import { run } from "./__tools__/run";
+
+const program = new Command();
 
 program.version(require("./package.json").version);
 

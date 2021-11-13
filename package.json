@@ -9,7 +9,7 @@
     "license": "ISC",
     "keywords": [],
     "scripts": {
-        "build": "packagr",
+        "build": "node node_modules/npm-packagr/cli.js",
         "prepublishOnly": "exit 1",
         "start": "packagr --dev"
     },
