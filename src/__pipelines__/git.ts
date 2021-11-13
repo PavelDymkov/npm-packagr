@@ -11,9 +11,7 @@ export function git(
     return () => {
         switch (action) {
             case "push":
-                if (not(isNoChanges())) {
-                    run("git push");
-                }
+                run("git push");
                 break;
             case "check-status":
                 if (not(isNoChanges())) {
