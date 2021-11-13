@@ -9,10 +9,9 @@
     "license": "ISC",
     "keywords": [],
     "scripts": {
-        "packagr:dev": "packagr --dev",
-        "packagr:publish": "packagr",
+        "build": "packagr",
         "prepublishOnly": "exit 1",
-        "start": "npm run packagr:dev"
+        "start": "packagr --dev"
     },
     "dependencies": {
         "commander": "^8.3.0",
