@@ -20,8 +20,6 @@ npmPackagr({
                 build(({ exec }) => exec("tsc")),
 
                 version("patch"),
-
-                git("push"),
             ],
         }),
 
@@ -42,6 +40,8 @@ npmPackagr({
                 badge(BadgeType.Build),
                 badge(BadgeType.TSDeclarations),
                 badge(BadgeType.License),
+
+                // git("push"),
             ],
         }),
 
