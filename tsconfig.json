@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "package",
+        "baseUrl": "src",
+        "module": "CommonJS",
+        "moduleResolution": "Node",
+        "target": "ES2020",
+        "strict": true,
+        "declaration": true
+    },
+
+    "files": ["src/index.ts", "src/pipelines.ts", "src/__cli-program.ts"],
+    "include": ["scr/**/*.ts"]
+}
