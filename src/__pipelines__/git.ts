@@ -24,5 +24,5 @@ export function git(action: "push" | "check-status"): Pipeline {
 function isNoChanges(): boolean {
     const changes = exec("git status --porcelain", { silent: true });
 
-    return not(changes);
+    return not(changes.stdout.trim());
 }

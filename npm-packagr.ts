@@ -10,23 +10,18 @@ import {
 
 npmPackagr({
     pipelines: [
-        // doIf("publish", git("check-status")),
-
         doIf({
             env: "publish",
-            pipeline: build(({ exec }) => {
-                exec("tsc");
-            }),
-        }),
+            pipelines: [
+                // git("check-status"),
 
-        doIf({
-            env: "dev",
-            pipeline: build(({ exec }) => {
-                exec("tsc --watch");
-            }),
-        }),
+                build(({ exec }) => exec("tsc")),
 
-        doIf("publish", version("patch")),
+                version("patch"),
+
+                git("push"),
+            ],
+        }),
 
         packageJSON((packageJson) => {
             delete packageJson.scripts;
@@ -40,5 +35,12 @@ npmPackagr({
         }),
 
         assets("LICENSE", "README.md", "src/cli.js"),
+
+        doIf({
+            env: "dev",
+            pipeline: build(({ exec }) => {
+                exec("tsc --watch");
+            }),
+        }),
     ],
 });
