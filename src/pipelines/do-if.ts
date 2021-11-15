@@ -13,8 +13,8 @@ export function doIf(
 
 function check(
     state: "publish" | "dev",
-    { context }: PipelineContext,
+    { publish }: PipelineContext,
 ): boolean {
-    if (context.publish) return state === "publish";
+    if (publish) return state === "publish";
     else return state === "dev";
 }

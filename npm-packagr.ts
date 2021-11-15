@@ -1,59 +1,60 @@
-import { npmPackagr } from "npm-packagr";
+import { npmPackagr } from "./package"; // "npm-packagr";
 import {
     assets,
     badge,
     BadgeType,
     build,
-    cleanBadges,
     doIf,
     git,
     packageJSON,
+    Pipeline,
     version,
-} from "npm-packagr/pipelines";
+} from "./package/pipelines"; // "npm-packagr/pipelines";
 
 npmPackagr({
     pipelines: [
-        doIf({
-            env: "publish",
-            pipelines: [
-                git("check-status"),
+        doIf("publish", [
+            git("check-status"),
 
-                build(({ exec }) => exec("tsc")),
+            build(({ exec }) => exec("tsc")),
 
-                version("patch"),
-            ],
-        }),
+            version("patch"),
+        ]),
 
         packageJSON((packageJson) => {
             delete packageJson.scripts;
             delete packageJson.devDependencies;
 
             packageJson.main = "index.js";
-            packageJson.bin = {
-                packagr: "./cli.js",
-            };
             packageJson.types = ".";
+            packageJson.bin = {
+                packagr: "./bin.js",
+            };
         }),
 
-        doIf({
-            env: "publish",
-            pipelines: [
-                badge(BadgeType.Build),
-                badge(BadgeType.TSDeclarations),
-                badge(BadgeType.License),
+        doIf("publish", [
+            badge(BadgeType.Build),
+            badge(BadgeType.TSDeclarations),
+            badge(BadgeType.License),
 
-                git("commit", "npm-packagr"),
-                git("push"),
-            ],
-        }),
+            git("commit", "npm-packagr"),
+            git("push"),
+        ]),
 
         assets("LICENSE", "README.md", "src/cli.js"),
 
-        doIf({
-            env: "dev",
-            pipeline: build(({ exec }) => {
+        copyTSNodeConfig(),
+
+        doIf("dev", [
+            build(({ exec }) => {
                 exec("tsc --watch");
             }),
-        }),
+        ]),
     ],
 });
+
+function copyTSNodeConfig(): Pipeline {
+    return ({ cp, packageDirectory }) => {
+        cp("src/ts-node.config.json", packageDirectory);
+    };
+}

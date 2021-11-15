@@ -1,4 +1,4 @@
-import { run } from "../__tools__/run";
+import { run } from "../__internal__/run";
 import { Pipeline } from ".";
 
 export function publish(): Pipeline {

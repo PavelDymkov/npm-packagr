@@ -1,12 +1,11 @@
-import { Context } from "..";
-import { Pipeline } from ".";
+import { Pipeline, PipelineContext } from ".";
 
 export interface BuildHandler {
-    (context: Context): void;
+    (context: PipelineContext): void;
 }
 
 export function build(handler: BuildHandler): Pipeline {
-    return ({ context }) => {
+    return (context) => {
         handler(context);
     };
 }

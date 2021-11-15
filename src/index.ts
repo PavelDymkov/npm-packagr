@@ -1,10 +1,3 @@
-import { tools } from "./__tools__/tools";
+import { tools } from "./__internal__/tools";
 
 export * from "./npm-packagr";
-
-type Tools = typeof tools;
-
-export interface Context extends Tools {
-    development: boolean;
-    publish: boolean;
-}

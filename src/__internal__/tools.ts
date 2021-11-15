@@ -1,6 +1,6 @@
 import { cp, exit, ls, mkdir, mv, rm, sed, test } from "shelljs";
 
-import { run as exec } from "../__tools__/run";
+import { run as exec } from "./run";
 
 export const tools = {
     cp,
