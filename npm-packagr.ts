@@ -41,7 +41,7 @@ npmPackagr({
             git("push"),
         ]),
 
-        assets("LICENSE", "README.md", "src/cli.js"),
+        assets("LICENSE", "README.md", "src/bin.js"),
 
         copyTSNodeConfig(),
 
