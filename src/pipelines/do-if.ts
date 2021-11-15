@@ -1,20 +1,9 @@
-import { Pipeline, PipelineContext } from ".";
+import { Pipeline } from ".";
 
-export function doIf(
-    state: "publish" | "dev",
-    pipelines: Pipeline[],
-): Pipeline {
+export function doIf(target: string, pipelines: Pipeline[]): Pipeline {
     return (context) => {
         pipelines.forEach((pipeline) => {
-            if (check(state, context)) pipeline(context);
+            if (context.target === target) pipeline(context);
         });
     };
-}
-
-function check(
-    state: "publish" | "dev",
-    { publish }: PipelineContext,
-): boolean {
-    if (publish) return state === "publish";
-    else return state === "dev";
 }

@@ -1,1 +1,1 @@
-export const NPM_PACKAGR_DEV = "NPM_PACKAGR_DEV";
+export const NPM_PACKAGR_TARGET = "NPM_PACKAGR_TARGET";

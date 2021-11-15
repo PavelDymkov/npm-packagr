@@ -1,7 +1,7 @@
 import { not } from "logical-not";
 import { exit, mkdir, pwd, rm, test } from "shelljs";
 
-import { NPM_PACKAGR_DEV } from "./__internal__/constants";
+import { NPM_PACKAGR_TARGET } from "./__internal__/constants";
 import { tools } from "./__internal__/tools";
 import { Pipeline, PipelineContext } from "./pipelines/";
 
@@ -27,14 +27,11 @@ export function npmPackagr(params: Partial<NpmPackagrParams>): void {
 
     mkdir(packageDirectory);
 
-    const development = NPM_PACKAGR_DEV in process.env;
-
     const context: PipelineContext = Object.seal({
         ...tools,
 
         packageDirectory,
-        development,
-        publish: !development,
+        target: String(process.env[NPM_PACKAGR_TARGET]),
     });
 
     pipelines.forEach((pipeline) => pipeline(context));

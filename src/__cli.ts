@@ -1,7 +1,7 @@
 import { Command } from "commander";
 import { join } from "path";
 
-import { NPM_PACKAGR_DEV } from "./__internal__/constants";
+import { NPM_PACKAGR_TARGET } from "./__internal__/constants";
 import { run } from "./__internal__/run";
 
 const program = new Command();
@@ -14,18 +14,16 @@ program
         "path to build ts-script",
         "./npm-packagr.ts",
     )
-    .option("-D, --dev", "dev mode")
+    .option("-T, --target <name>", "packagr target", "publish")
     .parse(process.argv);
 
-const { script, dev } = program.opts() as {
+const { script, target } = program.opts() as {
     script: string;
-    dev: boolean;
+    target: string;
 };
 
 const tsConfig = join(__dirname, "ts-node.config.json");
 
-let command = `npx ts-node --project ${tsConfig} ${script}`;
-
-if (dev) command = `cross-env ${NPM_PACKAGR_DEV}=1 ` + command;
-
-run(command);
+run(
+    `cross-env ${NPM_PACKAGR_TARGET}="${target}" npx ts-node --project ${tsConfig} ${script}`,
+);

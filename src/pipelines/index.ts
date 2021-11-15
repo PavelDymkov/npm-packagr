@@ -2,7 +2,6 @@ import { tools } from "../__internal__/tools";
 
 export * from "./assets";
 export * from "./badge";
-export * from "./build";
 export * from "./do-if";
 export * from "./git";
 export * from "./package-json";
@@ -18,6 +17,5 @@ type Tools = typeof tools;
 
 export interface PipelineContext extends Tools {
     packageDirectory: string;
-    development: boolean;
-    publish: boolean;
+    target: string;
 }
