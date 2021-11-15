@@ -7,7 +7,6 @@ import {
     doIf,
     git,
     packageJSON,
-    Pipeline,
     version,
 } from "npm-packagr/pipelines";
 
@@ -41,9 +40,7 @@ npmPackagr({
             git("push"),
         ]),
 
-        assets("LICENSE", "README.md", "src/bin.js"),
-
-        copyTSNodeConfig(),
+        assets("LICENSE", "README.md", "src/bin.js", "src/ts-node.config.json"),
 
         doIf("dev", [
             build(({ exec }) => {
@@ -52,9 +49,3 @@ npmPackagr({
         ]),
     ],
 });
-
-function copyTSNodeConfig(): Pipeline {
-    return ({ cp, packageDirectory }) => {
-        cp("src/ts-node.config.json", packageDirectory);
-    };
-}
