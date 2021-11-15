@@ -1,4 +1,4 @@
-import { npmPackagr } from "./package"; // "npm-packagr";
+import { npmPackagr } from "npm-packagr";
 import {
     assets,
     badge,
@@ -9,7 +9,7 @@ import {
     packageJSON,
     Pipeline,
     version,
-} from "./package/pipelines"; // "npm-packagr/pipelines";
+} from "npm-packagr/pipelines";
 
 npmPackagr({
     pipelines: [

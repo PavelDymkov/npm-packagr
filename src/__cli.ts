@@ -1,4 +1,5 @@
 import { Command } from "commander";
+import { join } from "path";
 
 import { NPM_PACKAGR_DEV } from "./__internal__/constants";
 import { run } from "./__internal__/run";
@@ -21,7 +22,9 @@ const { script, dev } = program.opts() as {
     dev: boolean;
 };
 
-let command = `npx ts-node ${script}`;
+const tsConfig = join(__dirname, "ts-node.config.json");
+
+let command = `npx ts-node --project ${tsConfig} ${script}`;
 
 if (dev) command = `cross-env ${NPM_PACKAGR_DEV}=1 ` + command;
 

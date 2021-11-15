@@ -1,6 +1,6 @@
 {
     "name": "npm-packagr",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "Utility for build and publish npm package.",
     "author": {
         "name": "Pavel Dymkov",
@@ -32,7 +32,7 @@
     "devDependencies": {
         "@types/node": "^16.11.7",
         "@types/shelljs": "^0.8.9",
-        "npm-packagr": "^1.0.3",
+        "npm-packagr": "^1.0.6",
         "prettier": "^2.4.1",
         "typescript": "^4.4.4"
     }
