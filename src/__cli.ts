@@ -14,7 +14,7 @@ program
         "path to build ts-script",
         "./npm-packagr.ts",
     )
-    .option("-T, --target <name>", "packagr target", "publish")
+    .option("-T, --target <name>", "packagr target", "build")
     .parse(process.argv);
 
 const { script, target } = program.opts() as {

@@ -3,7 +3,6 @@ import {
     assets,
     badge,
     BadgeType,
-    build,
     doIf,
     git,
     packageJSON,
@@ -12,10 +11,10 @@ import {
 
 npmPackagr({
     pipelines: [
-        doIf("publish", [
+        doIf("build", [
             git("check-status"),
 
-            build(({ exec }) => exec("tsc")),
+            ({ exec }) => exec("tsc"),
 
             version("patch"),
         ]),
@@ -31,7 +30,7 @@ npmPackagr({
             };
         }),
 
-        doIf("publish", [
+        doIf("build", [
             badge(BadgeType.Build),
             badge(BadgeType.TSDeclarations),
             badge(BadgeType.License),
@@ -43,9 +42,9 @@ npmPackagr({
         assets("LICENSE", "README.md", "src/bin.js", "src/ts-node.config.json"),
 
         doIf("dev", [
-            build(({ exec }) => {
+            ({ exec }) => {
                 exec("tsc --watch");
-            }),
+            },
         ]),
     ],
 });
