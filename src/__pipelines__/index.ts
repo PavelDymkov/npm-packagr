@@ -5,7 +5,6 @@ export interface Pipeline {
 }
 
 export interface PipelineContext {
-    packageBadges: boolean;
     packageDirectory: string;
     context: Context;
 }

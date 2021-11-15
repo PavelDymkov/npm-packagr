@@ -13,11 +13,24 @@ export enum BadgeType {
     TSDeclarations = "dts",
 }
 
-export function badge(
+interface Badge {
+    (type: BadgeType): Pipeline;
+    (fileName: string, options: CreateOptions): Pipeline;
+}
+
+let cleaned = false;
+
+export const badge: Badge = (
     name: string | BadgeType,
     options?: CreateOptions,
-): Pipeline {
+): Pipeline => {
     return () => {
+        if (not(cleaned)) {
+            clean();
+
+            cleaned = true;
+        }
+
         if (not(options))
             switch (name) {
                 case BadgeType.Build:
@@ -58,13 +71,7 @@ export function badge(
             }
         else create(name, options);
     };
-}
-
-export function cleanBadges(): Pipeline {
-    return () => {
-        clean({});
-    };
-}
+};
 
 function getLicense(): string {
     const packageJSON = require(resolve("package.json")) as PackageJson;

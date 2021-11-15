@@ -1,39 +1,39 @@
-import { not } from "logical-not";
 import { exec, exit } from "shelljs";
 
-import { run } from "../__tools__/run";
 import { Pipeline } from ".";
 
-export function git(
-    action: "push" | "check-status" | "commit",
-    value?: string,
-): Pipeline {
+interface Git {
+    (action: "push" | "check-status"): Pipeline;
+    (action: "commit", message: string): Pipeline;
+}
+
+export const git: Git = (action, payload?: string): Pipeline => {
     return () => {
         switch (action) {
             case "push":
                 exec("git push", { silent: true });
                 break;
             case "check-status":
-                if (not(isNoChanges())) {
+                if (hasChanges()) {
                     console.log(`Git working directory not clean`);
 
                     exit(1);
                 }
                 break;
             case "commit":
-                if (not(isNoChanges())) {
+                if (hasChanges()) {
                     exec("git add .", { silent: true });
-                    exec(`git commit -m "${value || "update"}"`, {
+                    exec(`git commit -m "${payload}"`, {
                         silent: true,
                     });
                 }
                 break;
         }
     };
-}
+};
 
-function isNoChanges(): boolean {
+function hasChanges(): boolean {
     const changes = exec("git status --porcelain", { silent: true });
 
-    return not(changes.stdout.trim());
+    return Boolean(changes.stdout.trim());
 }

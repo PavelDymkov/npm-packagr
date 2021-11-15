@@ -6,7 +6,6 @@ import { tools } from "./__tools__/tools";
 import { Pipeline, PipelineContext } from "./__pipelines__";
 
 export interface NpmPackagrParams {
-    packageBadges: boolean;
     packageDirectory: string;
     pipelines: Pipeline[];
 }
@@ -22,11 +21,7 @@ export function npmPackagr(params: Partial<NpmPackagrParams>): void {
         exit(1);
     }
 
-    const {
-        packageBadges = false,
-        packageDirectory = "package",
-        pipelines = [],
-    } = params;
+    const { packageDirectory = "package", pipelines = [] } = params;
 
     if (test("-d", packageDirectory)) rm("-rf", packageDirectory);
 
@@ -35,7 +30,6 @@ export function npmPackagr(params: Partial<NpmPackagrParams>): void {
     const development = NPM_PACKAGR_DEV in process.env;
 
     const context: PipelineContext = {
-        packageBadges,
         packageDirectory,
         context: {
             ...tools,
