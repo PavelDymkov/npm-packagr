@@ -12,7 +12,7 @@ import { resolve } from "path";
 
 npmPackagr({
     pipelines: [
-        doIf("build", [
+        doIf("publish", [
             git("check-status"),
 
             ({ exec }) => exec("tsc"),
@@ -42,7 +42,7 @@ npmPackagr({
             };
         }),
 
-        doIf("build", [
+        doIf("publish", [
             badge(BadgeType.Build),
             badge(BadgeType.TSDeclarations),
             badge(BadgeType.License),
