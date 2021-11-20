@@ -24,7 +24,7 @@ async function login(account: string, email: string): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
         let step = 1;
 
-        stdout?.on("data", (x) => {
+        stdout?.on("data", () => {
             if (step === 1) {
                 stdin?.write(account + "\n");
             }
@@ -53,7 +53,7 @@ async function getPassword(): Promise<string> {
         createInterface({
             terminal: true,
             input: process.stdin,
-        }).question("", (password) => resolve(password));
+        }).question("?", (password) => resolve(password));
     });
 }
 
