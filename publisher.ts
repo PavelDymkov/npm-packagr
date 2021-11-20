@@ -16,13 +16,6 @@ npmPackagr({
 
             ({ exec }) => exec("tsc"),
 
-            ({ cp, packagePath }) => {
-                cp(
-                    "src/ts-node.config.json",
-                    packagePath("__internal__/ts-node.config.json"),
-                );
-            },
-
             version("patch"),
         ]),
 
@@ -33,7 +26,7 @@ npmPackagr({
             packageJson.main = "npm-packagr.js";
             packageJson.types = ".";
             packageJson.bin = {
-                packagr: "./__internal__/cli.js",
+                packagr: "./bin.js",
             };
         }),
 
@@ -44,9 +37,13 @@ npmPackagr({
 
             git("commit", "npm-packagr"),
             git("push"),
-        ]),
 
-        assets("LICENSE", "README.md", "src/bin.js"),
+            assets("LICENSE", "README.md", "src/bin.js"),
+            assets({
+                from: "src/ts-node.config.json",
+                to: "__internal__/ts-node.config.json",
+            }),
+        ]),
 
         doIf("dev", [
             ({ exec }) => {

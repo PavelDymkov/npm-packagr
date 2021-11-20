@@ -1,5 +1,4 @@
 import { not } from "logical-not";
-import { resolve } from "path";
 import { exit, mkdir, pwd, rm, test } from "shelljs";
 
 import { NPM_PACKAGR_TARGET } from "./__internal__/constants";

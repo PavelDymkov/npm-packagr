@@ -22,7 +22,7 @@ const { script, target } = program.opts() as {
     target: string;
 };
 
-const tsConfig = join(__dirname, "ts-node.config.json");
+const tsConfig = join(__dirname, "__internal__", "ts-node.config.json");
 
 run(
     `cross-env ${NPM_PACKAGR_TARGET}="${target}" npx ts-node --project ${tsConfig} ${script}`,
