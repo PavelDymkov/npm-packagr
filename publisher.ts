@@ -6,6 +6,7 @@ import {
     doIf,
     git,
     packageJSON,
+    publish,
     version,
 } from "npm-packagr/pipelines";
 
@@ -43,6 +44,8 @@ npmPackagr({
                 from: "src/ts-node.config.json",
                 to: "__internal__/ts-node.config.json",
             }),
+
+            publish({ account: "paveldymkov", email: "dymkov86@gmail.com" }),
         ]),
 
         doIf("dev", [

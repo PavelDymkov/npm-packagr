@@ -105,7 +105,7 @@ It has been published by `npm-packagr`!)
         badge
         </th>
         <td>
-        Create badges and add links to README.md
+        Create badges and add links to README.md.
         </td>
     </tr>
     <tr>
@@ -121,7 +121,7 @@ It has been published by `npm-packagr`!)
         git
         </th>
         <td>
-        Git commit or Git push
+        Git commit or Git push.
         </td>
     </tr>
     <tr>
@@ -129,7 +129,7 @@ It has been published by `npm-packagr`!)
         packageJSON
         </th>
         <td>
-        Manipulations with a package.json
+        Manipulations with a package.json.
         </td>
     </tr>
     <tr>
@@ -137,7 +137,7 @@ It has been published by `npm-packagr`!)
         publish
         </th>
         <td>
-        Publish a package
+        Publish a package.
         </td>
     </tr>
     <tr>
@@ -145,7 +145,7 @@ It has been published by `npm-packagr`!)
         test
         </th>
         <td>
-        Run a test
+        Run a test.
         </td>
     </tr>
     <tr>
@@ -153,7 +153,7 @@ It has been published by `npm-packagr`!)
         version
         </th>
         <td>
-        Bump a package version
+        Bump a package version.
         </td>
     </tr>
 </table>
