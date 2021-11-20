@@ -51,7 +51,7 @@ npmPackagr({
             git("push"),
         ]),
 
-        assets("LICENSE", "README.md"),
+        assets("LICENSE", "README.md", "src/bin.js"),
 
         doIf("dev", [
             ({ exec }) => {

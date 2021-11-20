@@ -16,9 +16,9 @@
         "url": "https://github.com/PavelDymkov/npm-packagr.git"
     },
     "scripts": {
-        "build": "packagr",
         "prepublishOnly": "exit 1",
-        "start": "packagr --target dev"
+        "publisher": "packagr --script publisher.ts --target publish",
+        "start": "packagr --script publisher.ts --target dev"
     },
     "dependencies": {
         "commander": "^8.3.0",
