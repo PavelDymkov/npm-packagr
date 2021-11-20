@@ -45,7 +45,7 @@ npmPackagr({
                 to: "__internal__/ts-node.config.json",
             }),
 
-            // publish({ account: "paveldymkov", email: "dymkov86@gmail.com" }),
+            publish({ account: "paveldymkov", email: "dymkov86@gmail.com" }),
         ]),
 
         doIf("dev", [
