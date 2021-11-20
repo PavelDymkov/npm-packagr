@@ -26,7 +26,7 @@ npmPackagr({
             packageJson.main = "npm-packagr.js";
             packageJson.types = ".";
             packageJson.bin = {
-                packagr: "./bin.js",
+                packagr: "./__internal__/cli.js",
             };
         }),
 
@@ -38,7 +38,7 @@ npmPackagr({
             git("commit", "npm-packagr"),
             git("push"),
 
-            assets("LICENSE", "README.md", "src/bin.js"),
+            assets("LICENSE", "README.md"),
             assets({
                 from: "src/ts-node.config.json",
                 to: "__internal__/ts-node.config.json",

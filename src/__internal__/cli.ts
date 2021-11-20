@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from "commander";
 import { join } from "path";
 
@@ -6,7 +8,7 @@ import { run } from "./run";
 
 const program = new Command();
 
-program.version(require("./package.json").version);
+program.version(require("../package.json").version);
 
 program
     .option(
@@ -22,7 +24,7 @@ const { script, target } = program.opts() as {
     target: string;
 };
 
-const tsConfig = join(__dirname, "__internal__", "ts-node.config.json");
+const tsConfig = join(__dirname, "ts-node.config.json");
 
 run(
     `cross-env ${NPM_PACKAGR_TARGET}="${target}" npx ts-node --project ${tsConfig} ${script}`,
