@@ -12,7 +12,7 @@ import {
 npmPackagr({
     pipelines: [
         doIf("build", [
-            git("check-status"),
+            // git("check-status"),
 
             ({ exec }) => exec("tsc"),
 
@@ -23,7 +23,7 @@ npmPackagr({
             delete packageJson.scripts;
             delete packageJson.devDependencies;
 
-            packageJson.main = "index.js";
+            packageJson.main = "npm-packagr.js";
             packageJson.types = ".";
             packageJson.bin = {
                 packagr: "./bin.js",

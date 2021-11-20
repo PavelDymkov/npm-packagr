@@ -9,6 +9,10 @@
         "declaration": true
     },
 
-    "files": ["src/index.ts", "src/pipelines/index.ts", "src/__cli.ts"],
+    "files": [
+        "src/npm-packagr.ts",
+        "src/pipelines/index.ts",
+        "src/__internal__/cli.ts"
+    ],
     "include": ["scr/**/*.ts"]
 }

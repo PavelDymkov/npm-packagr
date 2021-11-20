@@ -1,8 +1,8 @@
 import { Command } from "commander";
 import { join } from "path";
 
-import { NPM_PACKAGR_TARGET } from "./__internal__/constants";
-import { run } from "./__internal__/run";
+import { NPM_PACKAGR_TARGET } from "./constants";
+import { run } from "./run";
 
 const program = new Command();
 

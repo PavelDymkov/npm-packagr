@@ -4,6 +4,6 @@ import { Pipeline } from ".";
 
 export function assets(...files: string[]): Pipeline {
     return ({ packageDirectory }) => {
-        cp(files, packageDirectory);
+        cp("-R", files, packageDirectory);
     };
 }

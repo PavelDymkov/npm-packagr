@@ -6,11 +6,11 @@ import { tools } from "./__internal__/tools";
 import { Pipeline, PipelineContext } from "./pipelines/";
 
 export interface NpmPackagrParams {
-    packageDirectory: string;
+    packageDirectory?: string;
     pipelines: Pipeline[];
 }
 
-export function npmPackagr(params: Partial<NpmPackagrParams>): void {
+export function npmPackagr(params: NpmPackagrParams): void {
     if (not(test("-f", "package.json"))) {
         const currentDirectory = pwd().stdout.trim();
 
@@ -21,7 +21,7 @@ export function npmPackagr(params: Partial<NpmPackagrParams>): void {
         exit(1);
     }
 
-    const { packageDirectory = "package", pipelines = [] } = params;
+    const { packageDirectory = "package", pipelines } = params;
 
     if (test("-d", packageDirectory)) rm("-rf", packageDirectory);
 
