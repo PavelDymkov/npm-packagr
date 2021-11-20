@@ -18,6 +18,4 @@ type Tools = typeof tools;
 export interface PipelineContext extends Tools {
     packageDirectory: string;
     target: string;
-
-    packagePath(...pathSegments: string[]): string;
 }

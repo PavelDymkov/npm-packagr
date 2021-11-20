@@ -33,10 +33,6 @@ export function npmPackagr(params: NpmPackagrParams): void {
 
         packageDirectory,
         target: String(process.env[NPM_PACKAGR_TARGET]),
-
-        packagePath(...pathSegments: string[]): string {
-            return resolve(packageDirectory, ...pathSegments);
-        },
     });
 
     pipelines.forEach((pipeline) => pipeline(context));
