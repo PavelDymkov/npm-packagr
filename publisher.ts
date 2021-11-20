@@ -8,7 +8,6 @@ import {
     packageJSON,
     version,
 } from "npm-packagr/pipelines";
-import { resolve } from "path";
 
 npmPackagr({
     pipelines: [
@@ -17,14 +16,10 @@ npmPackagr({
 
             ({ exec }) => exec("tsc"),
 
-            ({ cp, packageDirectory }) => {
+            ({ cp, packagePath }) => {
                 cp(
                     "src/ts-node.config.json",
-                    resolve(
-                        packageDirectory,
-                        "__internal__",
-                        "ts-node.config.json",
-                    ),
+                    packagePath("__internal__/ts-node.config.json"),
                 );
             },
 
