@@ -8,13 +8,25 @@ import {
     packageJSON,
     version,
 } from "npm-packagr/pipelines";
+import { resolve } from "path";
 
 npmPackagr({
     pipelines: [
         doIf("build", [
-            // git("check-status"),
+            git("check-status"),
 
             ({ exec }) => exec("tsc"),
+
+            ({ cp, packageDirectory }) => {
+                cp(
+                    "src/ts-node.config.json",
+                    resolve(
+                        packageDirectory,
+                        "__internal__",
+                        "ts-node.config.json",
+                    ),
+                );
+            },
 
             version("patch"),
         ]),
@@ -26,7 +38,7 @@ npmPackagr({
             packageJson.main = "npm-packagr.js";
             packageJson.types = ".";
             packageJson.bin = {
-                packagr: "./bin.js",
+                packagr: "./__internal__/cli.js",
             };
         }),
 
@@ -39,7 +51,7 @@ npmPackagr({
             git("push"),
         ]),
 
-        assets("LICENSE", "README.md", "src/bin.js", "src/ts-node.config.json"),
+        assets("LICENSE", "README.md"),
 
         doIf("dev", [
             ({ exec }) => {

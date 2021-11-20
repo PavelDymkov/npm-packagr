@@ -12,7 +12,8 @@
     "files": [
         "src/npm-packagr.ts",
         "src/pipelines/index.ts",
-        "src/__internal__/cli.ts"
+        "src/__internal__/cli.ts",
+        "src/__internal__/npm-login.ts"
     ],
     "include": ["scr/**/*.ts"]
 }

@@ -1,11 +1,26 @@
 import { execSync as run } from "child_process";
-import { resolve } from "path";
+import { join, resolve } from "path";
+import { exec, exit } from "shelljs";
 
 import { Pipeline } from ".";
 
-export function publish(account?: { name: string; email: string }): Pipeline {
+export function publish(login?: { account: string; email: string }): Pipeline {
     return ({ packageDirectory }) => {
-        if (account) {
+        if (login) {
+            const { account, email } = login;
+
+            const executable = join(
+                __dirname,
+                "..",
+                "__internal__",
+                "npm-login.js",
+            );
+
+            const { code } = exec(
+                `node ${executable} --account ${account} --email ${email}`,
+            );
+
+            if (code) exit(1);
         }
 
         run("npm publish", {

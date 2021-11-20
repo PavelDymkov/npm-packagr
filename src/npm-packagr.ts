@@ -1,4 +1,5 @@
 import { not } from "logical-not";
+import { resolve } from "path";
 import { exit, mkdir, pwd, rm, test } from "shelljs";
 
 import { NPM_PACKAGR_TARGET } from "./__internal__/constants";
@@ -32,6 +33,10 @@ export function npmPackagr(params: NpmPackagrParams): void {
 
         packageDirectory,
         target: String(process.env[NPM_PACKAGR_TARGET]),
+
+        packagePath(...pathSegments: string[]): string {
+            return resolve(packageDirectory, ...pathSegments);
+        },
     });
 
     pipelines.forEach((pipeline) => pipeline(context));
