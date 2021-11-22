@@ -1,7 +1,9 @@
-import { execSync as run } from "child_process";
+import { execSync as exec } from "child_process";
+import { not } from "logical-not";
 import { join, resolve } from "path";
-import { exec, exit } from "shelljs";
+import { exit } from "shelljs";
 
+import { run } from "../__internal__/run";
 import { Pipeline } from ".";
 
 export function publish(login?: { account: string; email: string }): Pipeline {
@@ -16,14 +18,14 @@ export function publish(login?: { account: string; email: string }): Pipeline {
                 "npm-login.js",
             );
 
-            const { code } = exec(
+            const ok = run(
                 `node ${executable} --account ${account} --email ${email}`,
             );
 
-            if (code) exit(1);
+            if (not(ok)) exit(1);
         }
 
-        run("npm publish", {
+        exec("npm publish", {
             cwd: resolve(packageDirectory),
             stdio: "inherit",
         });

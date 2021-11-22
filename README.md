@@ -33,6 +33,7 @@ import { npmPackagr } from "npm-packagr";
 import { assets, doIf, packageJSON } from "npm-packagr/pipelines";
 
 npmPackagr({
+    packageDirectory: "some/path", // "package" by default
     pipelines: [
         // some manipulations with package.json
         packageJSON((packageJson) => {
@@ -90,70 +91,117 @@ It has been published by `npm-packagr`!)
 
 ## Pipelines
 
-<table>
-    <tr>
-        <th>
-        assets
-        </th>
-        <td>
-        Copy files to root of package directory.
-        Also can copy file to some target path in package directory.
-        </td>
-    </tr>
-    <tr>
-        <th>
-        badge
-        </th>
-        <td>
-        Create badges and add links to README.md.
-        </td>
-    </tr>
-    <tr>
-        <th>
-        doIf
-        </th>
-        <td>
-        Run any pipelines by the target.
-        </td>
-    </tr>
-    <tr>
-        <th>
-        git
-        </th>
-        <td>
-        Git commit or Git push.
-        </td>
-    </tr>
-    <tr>
-        <th>
-        packageJSON
-        </th>
-        <td>
-        Manipulations with a package.json.
-        </td>
-    </tr>
-    <tr>
-        <th>
-        publish
-        </th>
-        <td>
-        Publish a package.
-        </td>
-    </tr>
-    <tr>
-        <th>
-        test
-        </th>
-        <td>
-        Run a test.
-        </td>
-    </tr>
-    <tr>
-        <th>
-        version
-        </th>
-        <td>
-        Bump a package version.
-        </td>
-    </tr>
-</table>
+### assets
+
+Copy files to root of package directory.
+
+```ts
+assets("a", "b/c"); // same as cp -R a b/c package
+```
+
+Also can copy file to some target path in package directory.
+
+```ts
+assets({ from: "a", to: "b" }); // same as cp -R x package/b
+```
+
+### badge
+
+Create badges and add links to README.md. Using a
+[package-badges](https://www.npmjs.com/package/package-badges)
+
+### doIf
+
+Run pipelines by the target option.
+
+```ts
+doIf("target-name", [
+    () => {
+        console.log("show if run:");
+        console.log("npx packagr --target target-name");
+    },
+]);
+```
+
+### git
+
+Git actions and conditions.
+
+```ts
+git("branch", "brunchName"); // stop if the current brunch is not a "brunchName"
+git("check-status"); // stop if "git status" returns some changes
+git("commit", "message"); // git commit -m "message"
+git("push"); // git push
+```
+
+### packageJSON
+
+Manipulations with a package.json.
+
+### publish
+
+Publish a package.
+
+```ts
+publish(); // npm publish
+
+// or you can provide the npm account
+publish({ account: "name", email: "e@mail" });
+```
+
+### test
+
+Run a test.
+
+### version
+
+Bump a package version.
+
+## Custom pipeline
+
+Pipeline is just a function.
+The fisrt argument is the context that is an object contains some functions from
+[shelljs](https://www.npmjs.com/package/shelljs)
+and
+
+-   [exec](#exec)
+-   **packageDirectory** path to package directory.
+-   [sh](#sh)
+-   **target** target option.
+
+```ts
+import { Pipeline } from "./package/pipelines";
+
+const myPipeline: Pipeline = ({
+    cp, // shelljs
+    exec,
+    exit, // shelljs
+    ls, // shelljs
+    mkdir, // shelljs
+    mv, // shelljs
+    packageDirectory,
+    rm, // shelljs
+    sed, // shelljs
+    sh,
+    target,
+    test, // shelljs
+}) => {
+    /* ... */
+};
+```
+
+### exec
+
+Executes a command with output to console and returns `true` if success.
+
+```ts
+const success: boolean = exec("tsc");
+```
+
+### sh
+
+Executes a command with no output to console and returns string of the output.
+
+```ts
+const version: string = sh("node --version");
+```

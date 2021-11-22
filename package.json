@@ -1,6 +1,6 @@
 {
     "name": "npm-packagr",
-    "version": "1.0.15",
+    "version": "1.0.14",
     "description": "Utility for build and publish npm package.",
     "author": {
         "name": "Pavel Dymkov",

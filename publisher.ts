@@ -24,8 +24,8 @@ npmPackagr({
             delete packageJson.scripts;
             delete packageJson.devDependencies;
 
-            packageJson.main = "npm-packagr.js";
-            packageJson.types = ".";
+            packageJson.main = "./npm-packagr.js";
+            packageJson.types = "./npm-packagr.d.ts";
             packageJson.bin = {
                 packagr: "./__internal__/cli.js",
             };
@@ -45,7 +45,7 @@ npmPackagr({
                 to: "__internal__/ts-node.config.json",
             }),
 
-            // publish({ account: "paveldymkov", email: "dymkov86@gmail.com" }),
+            publish({ account: "paveldymkov", email: "dymkov86@gmail.com" }),
         ]),
 
         doIf("dev", [

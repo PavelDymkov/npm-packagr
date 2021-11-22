@@ -5,6 +5,7 @@ import { Pipeline } from ".";
 interface Git {
     (action: "push" | "check-status"): Pipeline;
     (action: "commit", message: string): Pipeline;
+    (action: "branch", brunchName: string): Pipeline;
 }
 
 export const git: Git = (action, payload?: string): Pipeline => {
@@ -28,6 +29,13 @@ export const git: Git = (action, payload?: string): Pipeline => {
                     });
                 }
                 break;
+            case "branch":
+                if (getBranchName() !== payload) {
+                    console.log(`Git branch is not a ${getBranchName()}`);
+
+                    exit(1);
+                }
+                break;
         }
     };
 };
@@ -36,4 +44,8 @@ function hasChanges(): boolean {
     const changes = exec("git status --porcelain", { silent: true });
 
     return Boolean(changes.stdout.trim());
+}
+
+function getBranchName(): string {
+    return exec("git branch").stdout.trim();
 }

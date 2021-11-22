@@ -53,7 +53,7 @@ async function getPassword(): Promise<string> {
         createInterface({
             terminal: true,
             input: process.stdin,
-        }).question("?", (password) => resolve(password));
+        }).question("", (password) => resolve(password));
     });
 }
 
