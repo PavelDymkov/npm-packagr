@@ -1,5 +1,7 @@
-import { exec } from "shelljs";
+import { not } from "logical-not";
+import { exit } from "shelljs";
 
+import { run } from "../__internal__/run";
 import { Pipeline } from ".";
 
 export function version(
@@ -13,6 +15,12 @@ export function version(
         | "prerelease",
 ): Pipeline {
     return () => {
-        exec(`npm version ${action}`, { silent: true });
+        const ok = run(`npm version ${action}`, { silent: true });
+
+        if (not(ok)) {
+            console.log(`Error by "npm version ${action}"`);
+
+            exit(1);
+        }
     };
 }

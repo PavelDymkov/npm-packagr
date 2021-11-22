@@ -192,10 +192,12 @@ const myPipeline: Pipeline = ({
 
 ### exec
 
-Executes a command with output to console and returns `true` if success.
+Executes a command with output to console (or silent) and returns `true` if success.
 
 ```ts
 const success: boolean = exec("tsc");
+// or
+const success: boolean = exec("tsc", { silent: true });
 ```
 
 ### sh
