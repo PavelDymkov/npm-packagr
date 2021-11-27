@@ -57,8 +57,8 @@ export const badge: Badge = (
                 case BadgeType.Test:
                     create("test", {
                         label: "test",
-                        message: getNpmVersion(),
-                        messageColor: "informational",
+                        message: "passing",
+                        messageColor: "success",
                     });
                     break;
                 case BadgeType.TSDeclarations:
