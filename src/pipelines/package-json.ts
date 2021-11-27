@@ -8,7 +8,7 @@ export interface PackageJsonHandler {
     (packageJson: PackageJson, context: PipelineContext): void;
 }
 
-export function packageJSON(handler: PackageJsonHandler): Pipeline {
+export function packageJSON(handler: PackageJsonHandler = () => {}): Pipeline {
     return (context) => {
         const packageJSON = require(resolve("package.json")) as PackageJson;
 
