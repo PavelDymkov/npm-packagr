@@ -33,7 +33,7 @@
     "devDependencies": {
         "@types/node": "^16.11.7",
         "@types/shelljs": "^0.8.9",
-        "npm-packagr": "^1.0.24",
+        "npm-packagr": "^1.0.25",
         "prettier": "^2.4.1",
         "typescript": "^4.4.4"
     }
