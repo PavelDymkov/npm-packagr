@@ -47,6 +47,13 @@ npmPackagr({
             }),
 
             publish({ account: "paveldymkov", email: "dymkov86@gmail.com" }),
+
+            ({ exec }) => {
+                exec(`npm i -D npm-packagr`);
+            },
+
+            git("commit", "npm-packagr"),
+            git("push"),
         ]),
 
         doIf("dev", [npx("tsc --watch")]),
