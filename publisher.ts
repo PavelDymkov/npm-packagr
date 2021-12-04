@@ -5,6 +5,7 @@ import {
     BadgeType,
     doIf,
     git,
+    npx,
     packageJSON,
     publish,
     version,
@@ -13,7 +14,7 @@ import {
 npmPackagr({
     pipelines: [
         doIf("publish", [
-            ({ exec }) => exec("tsc"),
+            npx("tsc"),
 
             git("commit", "npm-packagr"),
 
@@ -48,10 +49,6 @@ npmPackagr({
             publish({ account: "paveldymkov", email: "dymkov86@gmail.com" }),
         ]),
 
-        doIf("dev", [
-            ({ exec }) => {
-                exec("tsc --watch");
-            },
-        ]),
+        doIf("dev", [npx("tsc --watch")]),
     ],
 });
