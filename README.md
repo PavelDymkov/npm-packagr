@@ -149,6 +149,16 @@ git("commit", "message"); // git commit -m "message"
 git("push"); // git push
 ```
 
+### npx
+
+Run `npx`.
+
+```ts
+npx("tsc")
+// equals
+({ exec }) => exec("npx tsc")
+```
+
 ### packageJSON
 
 Manipulations with a package.json.

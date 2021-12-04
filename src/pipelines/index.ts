@@ -5,6 +5,7 @@ export * from "./badge";
 export * from "./do-if";
 export * from "./file";
 export * from "./git";
+export * from "./npx";
 export * from "./package-json";
 export * from "./publish";
 export * from "./test";
