@@ -3,6 +3,7 @@ import { tools } from "../__internal__/tools";
 export * from "./assets";
 export * from "./badge";
 export * from "./do-if";
+export * from "./file";
 export * from "./git";
 export * from "./package-json";
 export * from "./publish";

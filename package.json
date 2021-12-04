@@ -1,12 +1,12 @@
 {
     "name": "npm-packagr",
-    "version": "1.0.17",
+    "version": "1.0.18",
     "description": "Utility for build and publish npm package.",
     "author": {
         "name": "Pavel Dymkov",
         "email": "dymkov86@gmail.com"
     },
-    "license": "ISC",
+    "license": "MIT",
     "keywords": [
         "npm",
         "build",

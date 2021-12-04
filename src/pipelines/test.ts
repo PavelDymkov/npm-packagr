@@ -3,6 +3,6 @@ import { Pipeline } from ".";
 
 export function test(): Pipeline {
     return () => {
-        run("npm run test");
+        run("npm test");
     };
 }

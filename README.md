@@ -4,7 +4,7 @@
 ![d.ts: ✔](https://raw.githubusercontent.com/PavelDymkov/npm-packagr/master/badges/dts.svg)
 ![license: ISC](https://raw.githubusercontent.com/PavelDymkov/npm-packagr/master/badges/license.svg)
 
-The utility to build and publish an npm package.
+The utility to build and publish a npm package.
 
 ## Why?
 
@@ -121,6 +121,21 @@ doIf("target-name", [
         console.log("npx packagr --target target-name");
     },
 ]);
+```
+
+### file
+
+Write a file.
+
+```ts
+file(() => ({
+    name: "cli.js",
+    content: `
+        #!/usr/bin/env node
+
+        require("..");
+    `,
+}));
 ```
 
 ### git
