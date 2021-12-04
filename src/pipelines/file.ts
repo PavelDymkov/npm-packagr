@@ -1,28 +1,47 @@
 import { writeFileSync as write } from "fs";
+import { not } from "logical-not";
+import { join } from "path";
+import { mkdir, test } from "shelljs";
 
 import { Pipeline } from ".";
 
 export interface FileConfig {
     name: string;
     content: string;
+    path?: string;
     raw?: boolean;
 }
 
 const startSpace = /^\s+/;
 
-export function file(config: () => FileConfig): Pipeline {
+export function file(getConfig: () => FileConfig): Pipeline {
     return () => {
-        const { name, content, raw } = config();
+        const config = getConfig();
 
-        if (raw) write(name, content);
+        const file = getPath(config);
+        const content = getContent(config);
 
-        const lines = content
-            .trim()
-            .split("\n")
-            .map((source) => source.replace(startSpace, ""));
-
-        lines.push("");
-
-        write(name, lines.join("\n"));
+        write(file, content);
     };
+}
+
+function getPath({ name, path }: FileConfig): string {
+    if (not(path)) return name;
+
+    if (not(test("-d", path))) mkdir("-p", path);
+
+    return join(path, name);
+}
+
+function getContent({ content, raw }: FileConfig): string {
+    if (raw) return content;
+
+    const lines = content
+        .trim()
+        .split("\n")
+        .map((source) => source.replace(startSpace, ""));
+
+    lines.push("");
+
+    return lines.join("\n");
 }

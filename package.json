@@ -1,6 +1,6 @@
 {
     "name": "npm-packagr",
-    "version": "1.0.19",
+    "version": "1.0.20",
     "description": "Utility for build and publish npm package.",
     "author": {
         "name": "Pavel Dymkov",
@@ -18,7 +18,7 @@
     },
     "scripts": {
         "prepublishOnly": "exit 1",
-        "publisher": "packagr --script publisher.ts --target publish",
+        "pub": "packagr --script publisher.ts --target publish",
         "start": "packagr --script publisher.ts --target dev"
     },
     "dependencies": {

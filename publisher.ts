@@ -13,9 +13,9 @@ import {
 npmPackagr({
     pipelines: [
         doIf("publish", [
-            git("check-status"),
-
             ({ exec }) => exec("tsc"),
+
+            git("commit", "npm-packagr"),
 
             version("patch"),
         ]),
