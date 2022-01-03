@@ -37,7 +37,15 @@ async function login(account: string, email: string): Promise<boolean> {
                 });
             }
             if (step === 3) {
-                stdin?.end(email + "\n");
+                stdin?.write(email + "\n");
+            }
+            if (step === 4) {
+                console.log("Enter the OTP code provided to email:");
+
+                getOTP().then((code) => {
+                    console.log("pending...");
+                    stdin?.write(code + "\n");
+                });
             }
 
             step += 1;
@@ -54,6 +62,16 @@ async function getPassword(): Promise<string> {
             terminal: true,
             input: process.stdin,
         }).question("", (password) => resolve(password));
+    });
+}
+
+async function getOTP(): Promise<string> {
+    return new Promise((resolve) => {
+        createInterface({
+            terminal: true,
+            input: process.stdin,
+            output: process.stdout,
+        }).question("", (code) => resolve(code));
     });
 }
 
