@@ -1,3 +1,5 @@
+import { not } from "logical-not";
+
 export class CLIParams {
     private items: string[] = [];
 
@@ -14,7 +16,9 @@ export class CLIParams {
         }
 
         if (typeof value === "boolean") {
-            if (value) this.items.push(kebabify(name));
+            this.items.push(kebabify(name));
+
+            if (not(value)) this.items.push("false");
         }
     }
 
