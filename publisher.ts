@@ -18,7 +18,10 @@ npmPackagr({
 
             git("commit", "npm-packagr"),
 
-            version("patch"),
+            version("patch", {
+                gitTagVersion: false,
+                message: "npm-packagr",
+            }),
         ]),
 
         packageJSON((packageJson) => {
