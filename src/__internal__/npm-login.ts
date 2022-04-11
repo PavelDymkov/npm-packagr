@@ -7,14 +7,19 @@ const program = new Command();
 program
     .option("--account <value>")
     .option("--email <value>")
+    .option("--registry <value>")
     .parse(process.argv);
 
-const { account, email } = program.opts() as { account: string; email: string };
+const { account, email, registry } = program.opts() as {
+    account: string;
+    email: string;
+    registry: string;
+};
 
 async function login(account: string, email: string): Promise<boolean> {
     console.log(`login to ${account}<${email}>`);
 
-    const process = exec("npm login", {
+    const process = exec(`npm login --registry ${registry}`, {
         async: true,
         silent: true,
     });

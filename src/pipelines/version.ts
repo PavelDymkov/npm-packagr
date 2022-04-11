@@ -5,7 +5,7 @@ import { CLIParams } from "../__internal__/cli-params";
 import { run } from "../__internal__/run";
 import { Pipeline } from ".";
 
-export interface VersionPipelineOptions {
+export interface PipelineVersionOptions {
     allowSameVersion: boolean;
     commitHooks: boolean;
     includeWorkspaceRoot: boolean;
@@ -28,7 +28,7 @@ export function version(
         | "preminor"
         | "prepatch"
         | "prerelease",
-    options: Partial<VersionPipelineOptions> = {},
+    options: Partial<PipelineVersionOptions> = {},
 ): Pipeline {
     return () => {
         const ok = run(`npm version ${action}${new CLIParams(options)}`, {
