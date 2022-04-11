@@ -49,7 +49,9 @@ npmPackagr({
                 to: "__internal__/ts-node.config.json",
             }),
 
-            publish({ account: "paveldymkov", email: "dymkov86@gmail.com" }),
+            publish({
+                login: { account: "paveldymkov", email: "dymkov86@gmail.com" },
+            }),
 
             ({ exec }) => {
                 exec(`npm i -D npm-packagr`);
