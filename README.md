@@ -1,5 +1,7 @@
 # npm packagr
 
+![build: passing](https://raw.githubusercontent.com/PavelDymkov/npm-packagr/master/badges/build.svg)
+![d.ts: ✔](https://raw.githubusercontent.com/PavelDymkov/npm-packagr/master/badges/dts.svg)
 ![license: MIT](https://raw.githubusercontent.com/PavelDymkov/npm-packagr/master/badges/license.svg)
 
 The utility to build and publish a npm package.
