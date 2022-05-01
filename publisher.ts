@@ -14,9 +14,9 @@ import {
 npmPackagr({
     pipelines: [
         doIf("publish", [
-            npx("tsc"),
-
             git("commit", "npm-packagr"),
+
+            npx("tsc"),
 
             version("patch", {
                 gitTagVersion: false,
@@ -41,7 +41,6 @@ npmPackagr({
             badge(BadgeType.License),
 
             git("commit", "npm-packagr"),
-            git("push"),
 
             assets("LICENSE", "README.md"),
             assets({
