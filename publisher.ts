@@ -19,8 +19,12 @@ npmPackagr({
             npx("tsc"),
 
             version("patch", {
+                commitHooks: false,
                 gitTagVersion: false,
-                message: "npm-packagr",
+            }),
+            version("patch", {
+                commitHooks: false,
+                gitTagVersion: false,
             }),
         ]),
 
