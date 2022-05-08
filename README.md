@@ -210,6 +210,7 @@ const myPipeline: Pipeline = ({
     sh,
     target,
     test, // shelljs
+    touch, // shelljs
 }) => {
     /* ... */
 };

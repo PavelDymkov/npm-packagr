@@ -1,4 +1,4 @@
-import { cp, exit, ls, mkdir, mv, rm, sed, test } from "shelljs";
+import { cp, exit, ls, mkdir, mv, rm, sed, test, touch } from "shelljs";
 
 import { run as exec } from "./run";
 import { sh } from "./sh";
@@ -14,4 +14,5 @@ export const tools = {
     sed,
     sh,
     test,
+    touch,
 } as const;
