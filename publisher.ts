@@ -9,10 +9,10 @@ import {
     packageJSON,
     publish,
     version,
-} from "npm-packagr/pipelines";
+} from "npm-packagr/pipes";
 
 npmPackagr({
-    pipelines: [
+    pipeline: [
         doIf("publish", [
             git("commit", "npm-packagr"),
 
