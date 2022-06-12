@@ -3,7 +3,7 @@ import { clean, create, CreateOptions } from "package-badges";
 import { resolve } from "path";
 import { PackageJson } from "type-fest";
 
-import { Pipeline } from ".";
+import { Pipe } from ".";
 
 export enum BadgeType {
     Build = "build",
@@ -14,8 +14,8 @@ export enum BadgeType {
 }
 
 interface Badge {
-    (type: BadgeType): Pipeline;
-    (fileName: string, options: CreateOptions): Pipeline;
+    (type: BadgeType): Pipe;
+    (fileName: string, options: CreateOptions): Pipe;
 }
 
 let cleaned = false;
@@ -23,7 +23,7 @@ let cleaned = false;
 export const badge: Badge = (
     name: string | BadgeType,
     options?: CreateOptions,
-): Pipeline => {
+): Pipe => {
     return () => {
         if (not(cleaned)) {
             clean();

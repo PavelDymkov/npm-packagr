@@ -1,13 +1,17 @@
 import { not } from "logical-not";
-import { exit, mkdir, pwd, rm, test } from "shelljs";
+import { absolutePath, path } from "node-path-tags";
+import { join } from "path";
+import { cp, exit, mkdir, pwd, rm, test } from "shelljs";
 
 import { NPM_PACKAGR_TARGET } from "./__internal__/constants";
 import { tools } from "./__internal__/tools";
-import { Pipeline, PipelineContext } from "./pipelines/";
+import { Pipe, PipeContext } from "./pipes";
 
 export interface NpmPackagrParams {
-    packageDirectory?: string;
-    pipelines: Pipeline[];
+    packagePath?: string;
+    sourcePath?: string;
+
+    pipeline: Pipe[];
 }
 
 export function npmPackagr(params: NpmPackagrParams): void {
@@ -21,18 +25,30 @@ export function npmPackagr(params: NpmPackagrParams): void {
         exit(1);
     }
 
-    const { packageDirectory = "package", pipelines } = params;
+    const packagePath = params.packagePath
+        ? path`${params.packagePath}`
+        : "package";
+    const sourcePath = params.sourcePath ? path`${params.sourcePath}` : "src";
 
-    if (test("-d", packageDirectory)) rm("-rf", packageDirectory);
+    if (test("-d", packagePath)) rm("-rf", packagePath);
 
-    mkdir(packageDirectory);
+    mkdir("-p", packagePath);
 
-    const context: PipelineContext = Object.seal({
+    const { pipeline } = params;
+
+    const context: PipeContext = Object.seal({
         ...tools,
 
-        packageDirectory,
+        absolutePath,
+        packagePath,
+        path,
+        sourcePath,
         target: String(process.env[NPM_PACKAGR_TARGET]),
     });
 
-    pipelines.forEach((pipeline) => pipeline(context));
+    pipeline.forEach((pipeline) => pipeline(context));
+
+    const packageJson = join(packagePath, "package.json");
+
+    if (not(test("-f", packageJson))) cp("package.json", packageJson);
 }

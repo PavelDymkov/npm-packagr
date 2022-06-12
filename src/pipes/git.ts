@@ -1,14 +1,14 @@
 import { exec, exit } from "shelljs";
 
-import { Pipeline } from ".";
+import { Pipe } from ".";
 
 interface Git {
-    (action: "push" | "check-status"): Pipeline;
-    (action: "commit", message: string): Pipeline;
-    (action: "branch", brunchName: string): Pipeline;
+    (action: "push" | "check-status"): Pipe;
+    (action: "commit", message: string): Pipe;
+    (action: "branch", brunchName: string): Pipe;
 }
 
-export const git: Git = (action, payload?: string): Pipeline => {
+export const git: Git = (action, payload?: string): Pipe => {
     return () => {
         switch (action) {
             case "push":

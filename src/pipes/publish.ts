@@ -5,17 +5,15 @@ import { exit } from "shelljs";
 
 import { run } from "../__internal__/run";
 import { sh } from "../__internal__/sh";
-import { Pipeline } from ".";
+import { Pipe } from ".";
 
 export interface PipelinePublishOptions {
     login: { account: string; email: string };
     registry: string;
 }
 
-export function publish(
-    options: Partial<PipelinePublishOptions> = {},
-): Pipeline {
-    return ({ packageDirectory }) => {
+export function publish(options: Partial<PipelinePublishOptions> = {}): Pipe {
+    return ({ packagePath }) => {
         const registry = options.registry || sh(`npm config get registry`);
 
         if (options.login) {
@@ -36,7 +34,7 @@ export function publish(
         }
 
         exec(`npm publish --registry ${registry}`, {
-            cwd: resolve(packageDirectory),
+            cwd: resolve(packagePath),
             stdio: "inherit",
         });
     };

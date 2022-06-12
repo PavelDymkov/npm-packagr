@@ -3,7 +3,7 @@ import { exit } from "shelljs";
 
 import { CLIParams } from "../__internal__/cli-params";
 import { run } from "../__internal__/run";
-import { Pipeline } from ".";
+import { Pipe } from ".";
 
 export interface PipelineVersionOptions {
     allowSameVersion: boolean;
@@ -29,7 +29,7 @@ export function version(
         | "prepatch"
         | "prerelease",
     options: Partial<PipelineVersionOptions> = {},
-): Pipeline {
+): Pipe {
     return () => {
         const ok = run(`npm version ${action}${new CLIParams(options)}`, {
             silent: true,

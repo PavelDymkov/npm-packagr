@@ -30,11 +30,11 @@ File `npm-packagr.ts` contains:
 
 ```ts
 import { npmPackagr } from "npm-packagr";
-import { assets, doIf, packageJSON } from "npm-packagr/pipelines";
+import { assets, doIf, packageJSON } from "npm-packagr/pipes";
 
 npmPackagr({
     packageDirectory: "some/path", // "package" by default
-    pipelines: [
+    pipeline: [
         // some manipulations with package.json
         packageJSON((packageJson) => {
             delete packageJson.scripts;
@@ -89,7 +89,7 @@ It creates `package` directory that will seem like this:
 Also you can see [publisher.ts](https://github.com/PavelDymkov/npm-packagr/blob/main/publisher.ts) file of `npm-packagr`.
 It has been published by `npm-packagr`!)
 
-## Pipelines
+## Pipes
 
 ### assets
 
@@ -112,7 +112,7 @@ Create badges and add links to README.md. Using a
 
 ### doIf
 
-Run pipelines by the target option.
+Run pipeline by the target option.
 
 ```ts
 doIf("target-name", [

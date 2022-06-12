@@ -1,19 +1,12 @@
 {
     "compilerOptions": {
-        "outDir": "package",
-        "baseUrl": "src",
+        "declaration": true,
         "module": "CommonJS",
         "moduleResolution": "Node",
-        "target": "ES2020",
+        "outDir": "package",
         "strict": true,
-        "declaration": true
+        "target": "ES2020"
     },
 
-    "files": [
-        "src/npm-packagr.ts",
-        "src/pipelines/index.ts",
-        "src/__internal__/cli.ts",
-        "src/__internal__/npm-login.ts"
-    ],
-    "include": ["scr/**/*.ts"]
+    "include": ["src"]
 }

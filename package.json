@@ -26,6 +26,7 @@
         "commander": "^8.3.0",
         "cross-env": "^7.0.3",
         "logical-not": "^1.0.9",
+        "node-path-tags": "^1.0.0",
         "package-badges": "^1.0.13",
         "shelljs": "^0.8.5",
         "ts-node": "^10.7.0",

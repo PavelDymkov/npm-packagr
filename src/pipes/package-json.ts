@@ -2,13 +2,13 @@ import { readFileSync as read, writeFileSync as write } from "fs";
 import { resolve } from "path";
 import { PackageJson } from "type-fest";
 
-import { Pipeline, PipelineContext } from ".";
+import { Pipe, PipeContext } from ".";
 
 export interface PackageJsonHandler {
-    (packageJson: PackageJson, context: PipelineContext): void;
+    (packageJson: PackageJson, context: PipeContext): void;
 }
 
-export function packageJSON(handler: PackageJsonHandler = () => {}): Pipeline {
+export function packageJSON(handler: PackageJsonHandler = () => {}): Pipe {
     return (context) => {
         const packageJSON = JSON.parse(
             read("package.json").toString(),
@@ -16,7 +16,7 @@ export function packageJSON(handler: PackageJsonHandler = () => {}): Pipeline {
 
         handler(packageJSON, context);
 
-        const path = resolve(context.packageDirectory, "package.json");
+        const path = resolve(context.packagePath, "package.json");
         const file = JSON.stringify(packageJSON, null, "    ");
 
         write(path, file);
