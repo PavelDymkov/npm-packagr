@@ -1,4 +1,4 @@
-import { writeFileSync as write } from "fs";
+import { readFileSync as read, writeFileSync as write } from "fs";
 import { PackageJson } from "type-fest";
 
 import { Pipe, PipeContext } from ".";
@@ -9,11 +9,17 @@ export interface PackageJsonHandler {
 
 export function packageJSON(handler: PackageJsonHandler = () => {}): Pipe {
     return (context) => {
-        const packageJSON: PackageJson = require("./package.json");
+        const {
+            absolutePath: absolute,
+            packageDirectory,
+            path: relative,
+        } = context;
+
+        const packageJSON: PackageJson = require(absolute`package.json`);
 
         handler(packageJSON, context);
 
-        const path = context.path`${context.packageDirectory}/package.json`;
+        const path = relative`${packageDirectory}/package.json`;
         const file = JSON.stringify(packageJSON, null, "    ");
 
         write(path, file);
