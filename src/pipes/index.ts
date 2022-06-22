@@ -21,13 +21,13 @@ export interface Pipe {
 type Tools = typeof tools;
 
 type FromNpmPackagrParams<Keys extends keyof NpmPackagrParams> = {
-    [Key in Keys]-?: Exclude<NpmPackagrParams[Key], undefined>;
+    readonly [Key in Keys]-?: Exclude<NpmPackagrParams[Key], undefined>;
 };
 
 export interface PipeContext
     extends Tools,
-        FromNpmPackagrParams<"packagePath" | "sourcePath"> {
-    absolutePath: typeof absolutePath;
-    path: typeof path;
-    target: string;
+        FromNpmPackagrParams<"packageDirectory" | "sourceDirectory"> {
+    readonly absolutePath: typeof absolutePath;
+    readonly path: typeof path;
+    readonly target: string;
 }

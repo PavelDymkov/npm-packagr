@@ -13,7 +13,7 @@ export interface PipelinePublishOptions {
 }
 
 export function publish(options: Partial<PipelinePublishOptions> = {}): Pipe {
-    return ({ packagePath }) => {
+    return ({ packageDirectory }) => {
         const registry = options.registry || sh(`npm config get registry`);
 
         if (options.login) {
@@ -34,7 +34,7 @@ export function publish(options: Partial<PipelinePublishOptions> = {}): Pipe {
         }
 
         exec(`npm publish --registry ${registry}`, {
-            cwd: resolve(packagePath),
+            cwd: resolve(packageDirectory),
             stdio: "inherit",
         });
     };

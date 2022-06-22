@@ -12,13 +12,13 @@ export const assets: Assets = (...files): Pipe => {
     if (files.length === 0) return () => {};
 
     if (typeof files[0] === "string")
-        return ({ packagePath }) => {
-            cp("-R", files as string[], packagePath);
+        return ({ packageDirectory }) => {
+            cp("-R", files as string[], packageDirectory);
         };
 
     const [config] = files;
 
-    return ({ packagePath }) => {
-        cp("-R", config.from, resolve(packagePath, config.to));
+    return ({ packageDirectory }) => {
+        cp("-R", config.from, resolve(packageDirectory, config.to));
     };
 };

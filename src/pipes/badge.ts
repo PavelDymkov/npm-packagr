@@ -36,7 +36,7 @@ export const badge: Badge = (
                 case BadgeType.Build:
                     create("build", {
                         label: "build",
-                        message: "passing",
+                        message: "success",
                         messageColor: "success",
                     });
                     break;
@@ -57,7 +57,7 @@ export const badge: Badge = (
                 case BadgeType.Test:
                     create("test", {
                         label: "test",
-                        message: "passing",
+                        message: "passed",
                         messageColor: "success",
                     });
                     break;

@@ -45,7 +45,9 @@ async function login(account: string, email: string): Promise<boolean> {
                 stdin?.write(email + "\n");
             }
             if (step === 4) {
-                console.log("Enter the OTP code provided to email:");
+                console.log(
+                    "Enter one-time password from your authenticator app:",
+                );
 
                 getOTP().then((code) => {
                     console.log("pending...");
