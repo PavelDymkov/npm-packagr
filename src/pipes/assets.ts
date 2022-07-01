@@ -1,9 +1,10 @@
-import { resolve } from "path/posix";
+import { resolve } from "path";
 import { cp } from "shelljs";
 
 import { Pipe } from ".";
 
 interface Assets {
+    (files: string[]): Pipe;
     (...files: string[]): Pipe;
     (config: { from: string; to: string }): Pipe;
 }
@@ -11,14 +12,16 @@ interface Assets {
 export const assets: Assets = (...files): Pipe => {
     if (files.length === 0) return () => {};
 
-    if (typeof files[0] === "string")
+    const [item] = files;
+
+    if (Array.isArray(item)) return assets(...item);
+
+    if (typeof item === "string")
         return ({ packageDirectory }) => {
             cp("-R", files as string[], packageDirectory);
         };
 
-    const [config] = files;
-
     return ({ packageDirectory }) => {
-        cp("-R", config.from, resolve(packageDirectory, config.to));
+        cp("-R", item.from, resolve(packageDirectory, item.to));
     };
 };

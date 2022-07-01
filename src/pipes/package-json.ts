@@ -1,4 +1,4 @@
-import { readFileSync as read, writeFileSync as write } from "fs";
+import { writeFileSync as write } from "fs";
 import { PackageJson } from "type-fest";
 
 import { Pipe, PipeContext } from ".";
