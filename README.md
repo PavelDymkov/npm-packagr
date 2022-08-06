@@ -174,6 +174,12 @@ publish(); // npm publish
 publish({ account: "name", email: "e@mail" });
 ```
 
+### tsc
+
+```ts
+tsc(), // same as ({ exec, packageDirectory }) => exec(`tsc --outDir ${packageDirectory}`)
+```
+
 ### test
 
 Run a test.
