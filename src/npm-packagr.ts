@@ -10,6 +10,8 @@ import {
 import { tools } from "./__internal__/tools";
 import { Pipe, PipeContext } from "./pipes";
 
+export * from "./pipes";
+
 export interface NpmPackagrParams {
     packageDirectory?: string;
     sourceDirectory?: string;

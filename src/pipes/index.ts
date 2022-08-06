@@ -11,6 +11,7 @@ export * from "./git";
 export * from "./npx";
 export * from "./package-json";
 export * from "./publish";
+export * from "./tsc";
 export * from "./test";
 export * from "./version";
 
