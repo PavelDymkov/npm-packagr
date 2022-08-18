@@ -5,6 +5,9 @@ import { run } from "../__internal__/run";
 import { Pipe } from ".";
 
 export interface TsCompilerOptions {
+    project: string;
+    watch: boolean;
+
     allowJs: boolean;
     checkJs: boolean;
     declaration: boolean;
@@ -121,6 +124,16 @@ export interface TsCompilerOptions {
 }
 
 export function tsc(options: Partial<TsCompilerOptions> = {}): Pipe {
+    return ({ packageDirectory }) => {
+        if (not(options.outDir)) options.outDir = packageDirectory;
+
+        const ok = run(`npx tsc ${getOptionsString(options)}`);
+
+        if (not(ok)) exit(1);
+    };
+}
+
+function getOptionsString(options: Partial<TsCompilerOptions>): string {
     const parts: string[] = [];
 
     Object.entries(options || {}).forEach(
@@ -129,13 +142,9 @@ export function tsc(options: Partial<TsCompilerOptions> = {}): Pipe {
 
             if (typeof value === "string") parts.push(value);
             if (typeof value === "boolean") parts.push(String(value));
-            if (Array.isArray(value)) parts.push(value.join(" "));
+            if (Array.isArray(value)) parts.push(...value);
         },
     );
 
-    return () => {
-        const ok = run(`npx tsc ${parts.join(" ")}`);
-
-        if (not(ok)) exit(1);
-    };
+    return parts.join(" ");
 }
