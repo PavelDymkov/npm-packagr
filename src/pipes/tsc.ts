@@ -2,7 +2,7 @@ import { not } from "logical-not";
 import { exit } from "shelljs";
 
 import { run } from "../__internal__/run";
-import { Pipe } from ".";
+import { Pipe, PipeContext } from ".";
 
 export interface TsCompilerOptions {
     project: string;
@@ -124,11 +124,31 @@ export interface TsCompilerOptions {
     types: string[];
 }
 
-export function tsc(options: Partial<TsCompilerOptions> = {}): Pipe {
-    return ({ packageDirectory }) => {
-        if (not(options.outDir)) options.outDir = packageDirectory;
+export interface PipeTscCallback {
+    (context: PipeContext): Partial<TsCompilerOptions>;
+}
+
+export function tsc(options?: Partial<TsCompilerOptions>): Pipe;
+export function tsc(handler: PipeTscCallback): Pipe;
+
+export function tsc(
+    parameter?: Partial<TsCompilerOptions> | PipeTscCallback,
+): Pipe {
+    if (not(parameter)) parameter = () => ({});
+
+    const callback: PipeTscCallback =
+        typeof parameter === "function"
+            ? parameter
+            : () => parameter as Partial<TsCompilerOptions>;
+
+    return (context) => {
+        const options = callback(context);
+
+        if (not(options.outDir)) options.outDir = context.packageDirectory;
 
         const files = options.files?.join(" ") || "";
+
+        delete options.files;
 
         const ok = run(`npx tsc ${getOptionsString(options)} ${files}`);
 

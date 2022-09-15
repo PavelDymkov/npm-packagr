@@ -7,12 +7,12 @@ import { run } from "../__internal__/run";
 import { sh } from "../__internal__/sh";
 import { Pipe } from ".";
 
-export interface PipelinePublishOptions {
+export interface PipePublishOptions {
     login: { account: string; email: string };
     registry: string;
 }
 
-export function publish(options: Partial<PipelinePublishOptions> = {}): Pipe {
+export function publish(options: Partial<PipePublishOptions> = {}): Pipe {
     return ({ packageDirectory }) => {
         const registry = options.registry || sh(`npm config get registry`);
 
