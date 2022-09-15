@@ -3,7 +3,7 @@ import { not } from "logical-not";
 import { join } from "path";
 import { mkdir, test } from "shelljs";
 
-import { Pipe } from ".";
+import { Pipe, PipeContext } from ".";
 
 export interface FileConfig {
     name: string;
@@ -14,9 +14,9 @@ export interface FileConfig {
 
 const startSpace = /^\s+/;
 
-export function file(getConfig: () => FileConfig): Pipe {
-    return () => {
-        const config = getConfig();
+export function file(getConfig: (context: PipeContext) => FileConfig): Pipe {
+    return (context) => {
+        const config = getConfig(context);
 
         const file = getPath(config);
         const content = getContent(config);

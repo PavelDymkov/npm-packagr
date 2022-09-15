@@ -14,6 +14,7 @@ export interface TsCompilerOptions {
     declarationMap: boolean;
     emitDeclarationOnly: boolean;
     esModuleInterop: boolean;
+    files: string[];
     jsx: "preserve" | "react" | "react-native" | "react-jsx" | "react-jsxdev";
     lib: (
         | "es5"
@@ -127,7 +128,9 @@ export function tsc(options: Partial<TsCompilerOptions> = {}): Pipe {
     return ({ packageDirectory }) => {
         if (not(options.outDir)) options.outDir = packageDirectory;
 
-        const ok = run(`npx tsc ${getOptionsString(options)}`);
+        const files = options.files?.join(" ") || "";
+
+        const ok = run(`npx tsc ${getOptionsString(options)} ${files}`);
 
         if (not(ok)) exit(1);
     };
