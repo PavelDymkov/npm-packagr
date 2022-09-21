@@ -37,7 +37,7 @@ export function version(
 
         if (not(ok)) {
             console.log(
-                `Error by "npm version ${action}"${new CLIParams(options)}`,
+                `Error by "npm version ${action}${new CLIParams(options)}"`,
             );
 
             exit(1);
