@@ -23,6 +23,8 @@ export class CLIParams {
     }
 
     toString(): string {
+        if (this.items.length === 0) return "";
+
         return " " + this.items.join(" ");
     }
 }

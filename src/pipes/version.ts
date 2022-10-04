@@ -31,14 +31,12 @@ export function version(
     options: Partial<PipeVersionOptions> = {},
 ): Pipe {
     return () => {
-        const ok = run(`npm version ${action}${new CLIParams(options)}`, {
-            silent: true,
-        });
+        const command = `npm version ${action}${new CLIParams(options)}`;
+
+        const ok = run(command, { silent: true });
 
         if (not(ok)) {
-            console.log(
-                `Error by "npm version ${action}${new CLIParams(options)}"`,
-            );
+            console.log(`Error by "${command}"`);
 
             exit(1);
         }

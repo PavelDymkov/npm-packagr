@@ -7,17 +7,27 @@ import { run } from "../__internal__/run";
 import { sh } from "../__internal__/sh";
 import { Pipe } from ".";
 
+export interface PipePublishLoginOptions {
+    account: string;
+    email: string;
+}
+
 export interface PipePublishOptions {
-    login: { account: string; email: string };
+    login: PipePublishLoginOptions;
     registry: string;
 }
 
-export function publish(options: Partial<PipePublishOptions> = {}): Pipe {
-    return ({ packageDirectory }) => {
-        const registry = options.registry || sh(`npm config get registry`);
+export function publish(
+    options: Partial<PipePublishOptions> | PipePublishLoginOptions = {},
+): Pipe {
+    const parsedOptions = parseOptions(options);
 
-        if (options.login) {
-            const { account, email } = options.login;
+    return ({ packageDirectory }) => {
+        const registry =
+            parsedOptions.registry || sh(`npm config get registry`);
+
+        if (parsedOptions.login) {
+            const { account, email } = parsedOptions.login;
 
             const executable = join(
                 __dirname,
@@ -38,4 +48,25 @@ export function publish(options: Partial<PipePublishOptions> = {}): Pipe {
             stdio: "inherit",
         });
     };
+}
+
+function parseOptions(
+    source: Partial<PipePublishOptions> | PipePublishLoginOptions,
+): Partial<PipePublishOptions> {
+    if (isPipePublishLoginOptions(source)) return { login: source };
+
+    return source;
+}
+
+function isPipePublishLoginOptions(
+    source: any,
+): source is PipePublishLoginOptions {
+    if (not(source)) return false;
+
+    const { account, email } = source as PipePublishLoginOptions;
+
+    if (typeof account !== "string") return false;
+    if (typeof email !== "string") return false;
+
+    return true;
 }
